@@ -1,0 +1,288 @@
+.log-panel-wrapper {
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  height: 100%;
+}
+
+.log-panel-header {
+  background: var(--bg-surface);
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border-default);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.log-panel-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.terminal-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dot-circle {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.dot-red { background: rgba(244, 63, 94, 0.7); }
+.dot-yellow { background: rgba(245, 158, 11, 0.7); }
+.dot-green { background: rgba(16, 185, 129, 0.7); }
+
+.log-panel-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.1px;
+}
+
+.log-terminal-icon {
+  color: var(--accent);
+}
+
+.log-count-tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-default);
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+/* Right Controls */
+.log-panel-right-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.log-filter-group {
+  display: flex;
+  background: var(--bg-input);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-xs);
+  padding: 2px;
+  gap: 2px;
+}
+
+.log-filter-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.log-filter-btn.active {
+  background: var(--border-default);
+  color: var(--text-primary);
+}
+
+.log-tool-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-default);
+  color: var(--text-secondary);
+  border-radius: var(--radius-xs);
+  padding: 3px 8px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.15s ease;
+}
+
+.log-tool-btn:hover:not(:disabled) {
+  background: var(--accent-glow);
+  border-color: var(--accent);
+  color: var(--accent-light);
+}
+
+.log-tool-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.log-tool-btn.copied {
+  background: var(--green-glow);
+  border-color: var(--green-border);
+  color: var(--green);
+}
+
+/* Scroll Area */
+.log-scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 14px;
+  font-family: var(--font-console);
+  font-size: 0.77rem;
+  line-height: 1.65;
+  letter-spacing: -0.2px;
+  font-variant-ligatures: contextual;
+  background: #05080e;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.log-empty-state {
+  color: var(--text-muted);
+  font-family: var(--font-console);
+  font-style: italic;
+  padding: 36px 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.log-empty-icon {
+  font-size: 1.4rem;
+  opacity: 0.6;
+}
+
+/* Interactive Log Item Row */
+.log-item-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  word-break: break-word;
+  font-family: var(--font-console);
+  padding: 4px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  user-select: text;
+  transition: all 0.15s ease;
+  position: relative;
+  border: 1px solid transparent;
+  animation: fadeInLog-kf 0.15s ease;
+}
+
+.log-item-row:hover {
+  background: rgba(0, 168, 255, 0.08);
+  border-color: rgba(0, 168, 255, 0.25);
+  box-shadow: 0 0 12px rgba(0, 168, 255, 0.06);
+}
+
+.log-item-row:hover .log-prompt-char {
+  color: var(--accent-light);
+  transform: translateX(2px);
+}
+
+.log-item-row:hover .log-copy-indicator {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.log-item-row:active {
+  transform: scale(0.995);
+  background: rgba(0, 168, 255, 0.14);
+}
+
+.log-item-row.copied {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.35);
+}
+
+.log-timestamp {
+  color: var(--text-muted);
+  font-family: var(--font-console);
+  font-size: 0.72rem;
+  flex-shrink: 0;
+  user-select: none;
+  opacity: 0.8;
+}
+
+.log-prompt-char {
+  color: var(--accent);
+  font-family: var(--font-console);
+  font-size: 0.78rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  user-select: none;
+  transition: transform 0.15s ease;
+}
+
+.log-message {
+  flex: 1;
+  font-family: var(--font-console);
+  color: #cbd5e1;
+  transition: color 0.15s ease;
+}
+
+.log-item-row:hover .log-message {
+  color: #f8fafc;
+}
+
+.log-message.info {
+  color: #cbd5e1;
+}
+
+.log-message.warn {
+  color: #fbbf24;
+}
+
+.log-message.error {
+  color: #f87171;
+  font-weight: 600;
+}
+
+.log-message.success {
+  color: #34d399;
+}
+
+/* Copy feedback indicator pill */
+.log-copy-indicator {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 0.15s ease;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-default);
+  color: var(--text-secondary);
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.log-item-row.copied .log-copy-indicator {
+  opacity: 1;
+  transform: scale(1);
+  background: rgba(16, 185, 129, 0.2);
+  border-color: rgba(16, 185, 129, 0.4);
+  color: var(--green);
+}
+
+@keyframes fadeInLog-kf {
+  from { opacity: 0; transform: translateX(-4px); }
+  to   { opacity: 1; transform: translateX(0); }
+}

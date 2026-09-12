@@ -1,0 +1,21 @@
+{
+  "name": "iptv-automation-backend",
+  "version": "1.0.0",
+  "description": "IPTV Registration Automation backend — Express",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "uuid": "^10.0.0",
+    "winston": "^3.13.0"
+  },
+  "devDependencies": {
+    "vitest": "^4.1.11"
+  }
+}

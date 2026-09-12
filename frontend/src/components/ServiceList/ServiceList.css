@@ -1,0 +1,224 @@
+.service-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  padding: 16px 18px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+}
+
+.service-card:hover {
+  border-color: var(--border-glow);
+  background: var(--bg-card-hover);
+}
+
+.service-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.service-label-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.service-icon-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-xs);
+  background: rgba(0, 168, 255, 0.1);
+  color: var(--accent);
+  border: 1px solid rgba(0, 168, 255, 0.2);
+}
+
+.service-header-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.service-quick-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-default);
+  color: var(--text-secondary);
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.service-quick-btn:hover:not(:disabled) {
+  background: var(--accent-glow);
+  border-color: var(--accent);
+  color: var(--accent-light);
+}
+
+.service-quick-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.service-count-chip {
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  background: rgba(0, 168, 255, 0.1);
+  color: var(--accent-light);
+  border: 1px solid rgba(0, 168, 255, 0.25);
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.service-count-chip.empty {
+  background: var(--yellow-glow);
+  color: var(--yellow);
+  border-color: var(--yellow-border);
+}
+
+.service-loading-state {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  padding: 8px 0;
+}
+
+.service-list-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 260px;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+
+.service-item-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.service-item-row:hover:not(.disabled) {
+  border-color: var(--border-glow);
+  background: rgba(0, 168, 255, 0.04);
+  transform: translateY(-1px);
+}
+
+.service-item-row.selected {
+  border-color: var(--accent);
+  background: rgba(0, 168, 255, 0.08);
+  box-shadow: 0 0 16px rgba(0, 168, 255, 0.12);
+}
+
+.service-item-row.disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Custom Checkbox visual */
+.service-checkbox-visual {
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+  border: 1.5px solid var(--border-default);
+  background: var(--bg-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+  color: #fff;
+}
+
+.service-item-row.selected .service-checkbox-visual {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 8px rgba(0, 168, 255, 0.4);
+}
+
+.service-checkbox-input {
+  display: none;
+}
+
+.service-meta-group {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.service-name-text {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.service-url-subtext {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.service-type-badge {
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  white-space: nowrap;
+  flex-shrink: 0;
+  border: 1px solid var(--border-subtle);
+}
+
+.service-item-row.selected .service-type-badge {
+  color: var(--accent-light);
+  border-color: rgba(0, 168, 255, 0.25);
+  background: rgba(0, 168, 255, 0.1);
+}
+
+.service-empty-warning {
+  margin-top: 8px;
+  font-size: 0.72rem;
+  color: var(--yellow);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: var(--yellow-glow);
+  border: 1px solid var(--yellow-border);
+  border-radius: var(--radius-xs);
+}

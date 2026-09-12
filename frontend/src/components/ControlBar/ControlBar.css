@@ -1,0 +1,207 @@
+.control-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Status Indicator */
+.status-pill-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  background: var(--bg-input);
+  border: 1px solid var(--border-default);
+  transition: all 0.25s ease;
+}
+
+.status-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.status-dot-indicator {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--text-muted);
+}
+
+.status-pill-container.status-running {
+  border-color: rgba(0, 168, 255, 0.4);
+  background: rgba(0, 168, 255, 0.06);
+}
+
+.status-pill-container.status-running .status-dot-indicator {
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+  animation: pulse-glow-kf 1.5s infinite ease-in-out;
+}
+
+.status-pill-container.status-done {
+  border-color: var(--green-border);
+  background: var(--green-glow);
+}
+
+.status-pill-container.status-done .status-dot-indicator {
+  background: var(--green);
+  box-shadow: 0 0 8px var(--green);
+}
+
+.status-pill-container.status-error {
+  border-color: var(--red-border);
+  background: var(--red-glow);
+}
+
+.status-pill-container.status-error .status-dot-indicator {
+  background: var(--red);
+  box-shadow: 0 0 8px var(--red);
+}
+
+.status-pill-container.status-cancelled {
+  border-color: var(--yellow-border);
+  background: var(--yellow-glow);
+}
+
+.status-pill-container.status-cancelled .status-dot-indicator {
+  background: var(--yellow);
+  box-shadow: 0 0 8px var(--yellow);
+}
+
+.status-state-text {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Active Email Box */
+.active-email-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 14px;
+  background: rgba(0, 168, 255, 0.06);
+  border: 1px solid rgba(0, 168, 255, 0.25);
+  border-radius: var(--radius-md);
+  animation: fadeIn-kf 0.3s ease;
+}
+
+.active-email-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.active-email-text {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent-light);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Action Buttons */
+.controls-button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.btn-command {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 20px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  font-family: var(--font-sans);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+}
+
+.btn-command-start {
+  background: var(--accent-gradient);
+  color: #04101e;
+  box-shadow: 0 4px 18px rgba(0, 168, 255, 0.35);
+}
+
+.btn-command-start:hover:not(:disabled) {
+  background: var(--accent-gradient-hover);
+  box-shadow: 0 6px 24px rgba(0, 168, 255, 0.5);
+  transform: translateY(-1px);
+}
+
+.btn-command-start:disabled {
+  background: var(--bg-input);
+  color: var(--text-muted);
+  border: 1px solid var(--border-default);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.btn-command-stop {
+  background: rgba(244, 63, 94, 0.1);
+  color: var(--red);
+  border: 1px solid var(--red-border);
+}
+
+.btn-command-stop:hover:not(:disabled) {
+  background: rgba(244, 63, 94, 0.2);
+  border-color: var(--red);
+  box-shadow: 0 0 16px var(--red-glow);
+  transform: translateY(-1px);
+}
+
+.btn-command-stop:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.control-hint-text {
+  font-size: 0.72rem;
+  color: var(--yellow);
+  text-align: center;
+  font-family: var(--font-mono);
+  padding: 4px;
+}
+
+@keyframes pulse-glow-kf {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.75);
+  }
+}
+
+@keyframes fadeIn-kf {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

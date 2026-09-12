@@ -1,0 +1,97 @@
+.provider-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  padding: 16px 18px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+}
+
+.provider-card:hover {
+  border-color: var(--border-glow);
+  background: var(--bg-card-hover);
+}
+
+.provider-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.provider-label-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.provider-icon-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-xs);
+  background: rgba(0, 168, 255, 0.1);
+  color: var(--accent);
+  border: 1px solid rgba(0, 168, 255, 0.2);
+}
+
+.provider-select-box {
+  position: relative;
+  width: 100%;
+}
+
+.provider-select {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  padding: 11px 40px 11px 14px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.provider-select:hover {
+  border-color: var(--border-glow);
+  background: var(--bg-input-focus);
+}
+
+.provider-select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+  background: var(--bg-input-focus);
+}
+
+.provider-arrow-icon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.provider-loading-state {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  padding: 8px 0;
+}
