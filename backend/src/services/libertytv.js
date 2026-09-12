@@ -44,6 +44,12 @@ function isRegistrationLimitPage(html) {
   );
 }
 
+function isCloudflareChallenge(html) {
+  return /(?:Just a moment|cf-chl-|challenge-platform|Cloudflare)/i.test(
+    html,
+  );
+}
+
 async function registerAccount({ jar, name, email, password, log }) {
   const {
     text: registerPage,
@@ -58,6 +64,12 @@ async function registerAccount({ jar, name, email, password, log }) {
   const csrf = getRegistrationCsrf(registerPage);
   if (!csrf) {
     if (registerStatus === 403) {
+      if (isCloudflareChallenge(registerPage)) {
+        throw new Error(
+          `[${TAG}] LibertyTV returned a Cloudflare challenge (HTTP 403). ` +
+            `Vercel cannot complete this browser verification.`,
+        );
+      }
       throw new Error(
         `[${TAG}] LibertyTV denied the Vercel request (HTTP 403). ` +
           `The registration form is blocked for this deployment's server IP.` +
