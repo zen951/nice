@@ -24,10 +24,42 @@ const TRIAL_HOURS = 24;
 const REGISTRATION_LIMIT_MESSAGE =
   "Too many registration attempts from your network. Please try again in an hour.";
 
+function getRegistrationCsrf(html) {
+  return (
+    extractInputValue(html, "csrf") ??
+    html.match(
+      /<input\b[^>]*\bname=["']csrf["'][^>]*\bvalue=["']([^"']+)["']/i,
+    )?.[1] ??
+    html.match(
+      /<input\b[^>]*\bvalue=["']([^"']+)["'][^>]*\bname=["']csrf["']/i,
+    )?.[1] ??
+    null
+  );
+}
+
+function isRegistrationLimitPage(html) {
+  return /Too many registration attempts from your network\.\s*Please try again in an hour\./i.test(
+    html,
+  );
+}
+
 async function registerAccount({ jar, name, email, password, log }) {
-  const { text: registerPage } = await get(`${BASE_URL}/register.php`, jar);
-  const csrf = extractInputValue(registerPage, "csrf");
-  if (!csrf) throw new Error(`[${TAG}] Registration CSRF token not found.`);
+  const {
+    text: registerPage,
+    status: registerStatus,
+    finalUrl: registerUrl,
+  } = await get(`${BASE_URL}/register.php`, jar);
+  if (isRegistrationLimitPage(registerPage)) {
+    log(`[${TAG}] ${REGISTRATION_LIMIT_MESSAGE}`, "warn");
+    throw new Error(`[${TAG}] ${REGISTRATION_LIMIT_MESSAGE}`);
+  }
+
+  const csrf = getRegistrationCsrf(registerPage);
+  if (!csrf) {
+    throw new Error(
+      `[${TAG}] Registration form unavailable (HTTP ${registerStatus}, ${registerUrl}).`,
+    );
+  }
 
   const response = await post(
     `${BASE_URL}/register.php`,
@@ -43,11 +75,7 @@ async function registerAccount({ jar, name, email, password, log }) {
     `${BASE_URL}/register.php`,
   );
 
-  if (
-    /Too many registration attempts from your network\.\s*Please try again in an hour\./i.test(
-      response.text,
-    )
-  ) {
+  if (isRegistrationLimitPage(response.text)) {
     log(`[${TAG}] ${REGISTRATION_LIMIT_MESSAGE}`, "warn");
     throw new Error(`[${TAG}] ${REGISTRATION_LIMIT_MESSAGE}`);
   }
@@ -101,7 +129,7 @@ export default {
       verificationUrl,
       jar,
       {
-        csrf: extractInputValue(verificationPage, "csrf") || "",
+        csrf: getRegistrationCsrf(verificationPage) || "",
         code,
         verification_code: code,
         otp: code,
