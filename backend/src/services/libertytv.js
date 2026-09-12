@@ -15,6 +15,7 @@ import {
   get,
   post,
   extractInputValue,
+  errSnippet,
 } from "../http/cookieClient.js";
 
 const BASE_URL = "https://account.libertytv.net";
@@ -56,6 +57,13 @@ async function registerAccount({ jar, name, email, password, log }) {
 
   const csrf = getRegistrationCsrf(registerPage);
   if (!csrf) {
+    if (registerStatus === 403) {
+      throw new Error(
+        `[${TAG}] LibertyTV denied the Vercel request (HTTP 403). ` +
+          `The registration form is blocked for this deployment's server IP.` +
+          ` ${errSnippet(registerPage, 180)}`,
+      );
+    }
     throw new Error(
       `[${TAG}] Registration form unavailable (HTTP ${registerStatus}, ${registerUrl}).`,
     );
